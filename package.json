@@ -1,0 +1,36 @@
+{
+  "name": "payment-service-provider",
+  "version": "1.0.0",
+  "description": "Simple payment service provider application",
+  "main": "index.js",
+  "scripts": {
+    "start": "pm2 start src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mukaportes/payment-service-provider.git"
+  },
+  "author": "Murilo Portescheller <mport.dev@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/mukaportes/payment-service-provider/issues"
+  },
+  "homepage": "https://github.com/mukaportes/payment-service-provider#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "pg": "^7.12.1",
+    "sequelize": "^5.21.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.6.0",
+    "faker": "^4.1.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
+  }
+}
