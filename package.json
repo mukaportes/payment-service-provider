@@ -4,8 +4,8 @@
   "description": "Simple payment service provider application",
   "main": "index.js",
   "scripts": {
-    "db:migrate": "knex --knexfile ./src/config/knexfile.js migrate:latest",
-    "db:rollback": "knex --knexfile ./src/config/knexfile.js migrate:rollback",
+    "migrate": "knex --knexfile ./src/config/knexfile.js migrate:latest",
+    "migrate:rollback": "knex --knexfile ./src/config/knexfile.js migrate:rollback",
     "start": "pm2 start src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
