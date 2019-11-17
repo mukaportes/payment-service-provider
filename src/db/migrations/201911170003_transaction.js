@@ -1,9 +1,9 @@
 /* eslint-disable max-lines-per-function, max-statements  */
 
 exports.up = knex => Promise.all([
-  knex.schema.withSchema('order').hasTable('transaction').then((exists) => {
+  knex.schema.withSchema('psp').hasTable('transaction').then((exists) => {
     if (!exists) {
-      return knex.schema.withSchema('order').createTable('transaction', (table) => {
+      return knex.schema.withSchema('psp').createTable('transaction', (table) => {
         table
           .uuid('transaction_uid')
           .comment('Unique code that identifies a transaction.');
@@ -55,9 +55,9 @@ exports.up = knex => Promise.all([
           .primary(['transaction_uid']);
 
         table
-          .foreign('client_uid', 'transaction_client_fkey')
-          .references('client_uid')
-          .inTable('psp.client')
+          .foreign('customer_uid', 'transaction_customer_fkey')
+          .references('customer_uid')
+          .inTable('psp.customer')
           .onDelete('RESTRICT')
           .onUpdate('RESTRICT');
       });
@@ -67,4 +67,4 @@ exports.up = knex => Promise.all([
   }),
 ]);
 
-exports.down = knex => knex.schema.withSchema('order').dropTableIfExists('transaction');
+exports.down = knex => knex.schema.withSchema('psp').dropTableIfExists('transaction');
