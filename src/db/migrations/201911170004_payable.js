@@ -13,8 +13,8 @@ exports.up = knex => Promise.all([
           .comment('Value of a payable.');
 
         table
-          .uuid('client_uid')
-          .comment('Unique code that identifies the client related to a payable.');
+          .uuid('transaction_uid')
+          .comment('Unique code that identifies the transaction related to a payable.');
 
         table
           .string('status')
@@ -23,6 +23,10 @@ exports.up = knex => Promise.all([
         table
           .decimal('fee', 15, 3)
           .comment('Fee of a payable.');
+        
+        table
+          .decimal('amount', 15, 3)
+          .comment('Amount of a payable.');
 
         table
           .timestamp('payment_date')
@@ -47,14 +51,6 @@ exports.up = knex => Promise.all([
         table
           .string('created_by', 50)
           .comment('Name of whom created an payable.');
-
-        table
-          .timestamp('updated_at')
-          .comment('Update date of an payable.');
-
-        table
-          .string('updated_by', 50)
-          .comment('Name of whom updated an payable.');
 
         table
           .comment('Table that contains the payables made by clients.');

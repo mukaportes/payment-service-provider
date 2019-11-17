@@ -9,12 +9,12 @@ exports.up = knex => Promise.all([
           .comment('Unique code that identifies a transaction.');
 
         table
-          .decimal('value', 15, 3)
-          .comment('Value of a transaction.');
+          .uuid('customer_uid')
+          .comment('Unique code that identifies the customer related to a transaction.');
 
         table
-          .uuid('client_uid')
-          .comment('Unique code that identifies the client related to a transaction.');
+          .decimal('amount', 15, 3)
+          .comment('Amount of a transaction.');
 
         table
           .string('description')
@@ -29,16 +29,16 @@ exports.up = knex => Promise.all([
           .comment('Last digits of the card number of a transaction.');
 
         table
-          .string('cardholder_name')
+          .string('card_holder_name')
           .comment('Name of the cardholder of a transaction.');
 
         table
-          .timestamp('card_expiry_date')
-          .comment('Card expiry date of a transaction.');
+          .timestamp('card_expiration_date')
+          .comment('Card expiration date of a transaction.');
 
         table
-          .integer('card_security_code')
-          .comment('Card security code of a transaction.');
+          .integer('card_cvv')
+          .comment('Card CVV of a transaction.');
 
         table
           .timestamp('created_at')
@@ -49,15 +49,7 @@ exports.up = knex => Promise.all([
           .comment('Name of whom created an transaction.');
 
         table
-          .timestamp('updated_at')
-          .comment('Update date of an transaction.');
-
-        table
-          .string('updated_by', 50)
-          .comment('Name of whom updated an transaction.');
-
-        table
-          .comment('Table that contains the transactions made by clients.');
+          .comment('Table that contains the transactions made by customers.');
 
         table
           .primary(['transaction_uid']);
