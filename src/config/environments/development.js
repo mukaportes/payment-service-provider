@@ -1,7 +1,3 @@
-const dotenv = require('dotenv');
-
-dotenv.config();
-
 module.exports = {
   db: {
     database: process.env.DATABASE_NAME,
