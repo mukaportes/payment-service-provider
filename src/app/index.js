@@ -16,7 +16,7 @@ const startExpress = (port) => {
 
     console.info(`App is listening on port ${port}`);
   } catch (error) {
-    console.error(`App failed to listen on port ${port}`);
+    console.error(`App failed to listen on port ${port}`, error);
   }
 };
 
