@@ -13,7 +13,7 @@ exports.up = knex => Promise.all([
           .comment('Unique code that identifies the transaction related to a payable.');
 
         table
-          .string('status')
+          .integer('status')
           .comment('Status of a payable.');
 
         table
