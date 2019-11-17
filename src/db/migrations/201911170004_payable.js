@@ -9,10 +9,6 @@ exports.up = knex => Promise.all([
           .comment('Unique code that identifies a payable.');
 
         table
-          .decimal('value', 15, 3)
-          .comment('Value of a payable.');
-
-        table
           .uuid('transaction_uid')
           .comment('Unique code that identifies the transaction related to a payable.');
 
@@ -33,18 +29,6 @@ exports.up = knex => Promise.all([
           .comment('Payment date of a payable.');
 
         table
-          .string('cardholder_name')
-          .comment('Name of the cardholder of a payable.');
-
-        table
-          .timestamp('card_expiry_date')
-          .comment('Card expiry date of a payable.');
-
-        table
-          .integer('card_security_code')
-          .comment('Card security code of a payable.');
-
-        table
           .timestamp('created_at')
           .comment('Creation date of an payable.');
 
@@ -53,15 +37,15 @@ exports.up = knex => Promise.all([
           .comment('Name of whom created an payable.');
 
         table
-          .comment('Table that contains the payables made by clients.');
+          .comment('Table that contains the payables related to transactions.');
 
         table
           .primary(['payable_uid']);
 
         table
-          .foreign('client_uid', 'payable_client_fkey')
-          .references('client_uid')
-          .inTable('psp.client')
+          .foreign('transaction_uid', 'payable_transaction_fkey')
+          .references('transaction_uid')
+          .inTable('psp.transaction')
           .onDelete('RESTRICT')
           .onUpdate('RESTRICT');
       });
