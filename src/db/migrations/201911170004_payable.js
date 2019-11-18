@@ -6,34 +6,42 @@ exports.up = knex => Promise.all([
       return knex.schema.withSchema('psp').createTable('payable', (table) => {
         table
           .uuid('payable_uid')
+          .notNullable()
           .comment('Unique code that identifies a payable.');
 
         table
           .uuid('transaction_uid')
+          .notNullable()
           .comment('Unique code that identifies the transaction related to a payable.');
 
         table
           .integer('status')
+          .notNullable()
           .comment('Status of a payable.');
 
         table
           .decimal('fee', 15, 3)
+          .notNullable()
           .comment('Fee of a payable.');
         
         table
           .decimal('amount', 15, 3)
+          .notNullable()
           .comment('Amount of a payable.');
 
         table
           .timestamp('payment_date')
+          .notNullable()
           .comment('Payment date of a payable.');
 
         table
           .timestamp('created_at')
+          .notNullable()
           .comment('Creation date of an payable.');
 
         table
           .string('created_by', 50)
+          .notNullable()
           .comment('Name of whom created an payable.');
 
         table
