@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 /**
- * @description Sets up default data handlers for an Express app
+ * @description Validates an input using a Joi schema
  * @param {any} input Input data to be validated 
  * @param {JoiSchema} schema Joi schema for the input data to be
  * validated upon
