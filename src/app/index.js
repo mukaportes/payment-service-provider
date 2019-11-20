@@ -1,6 +1,5 @@
 const express = require('express');
 const buildRoutes = require('../loaders/build-routes');
-const setupDb = require('../loaders/db');
 const setupMiddlewares = require('../loaders/setup-middlewares');
 
 const startExpress = (port) => {
@@ -9,7 +8,6 @@ const startExpress = (port) => {
 
     setupMiddlewares(app);
     buildRoutes(app);
-    setupDb();
 
     const server = app.listen(port);
     server.on('error', (error) => { throw new Error(error); });
