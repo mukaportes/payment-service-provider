@@ -1,3 +1,5 @@
+const transactionModel = require('./transaction');
+
 /* eslint-disable max-lines-per-function, sort-keys, max-lines */
 module.exports = (sequelize, DataTypes) => {
   const customer = sequelize.define('customer', {
@@ -51,6 +53,11 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
     schema: 'psp',
   });
+
+  const transaction = transactionModel(sequelize, DataTypes);
+
+  customer.hasMany(transaction);
+  transaction.belongsTo(customer);
 
   return customer;
 };
