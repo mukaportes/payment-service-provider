@@ -1,7 +1,7 @@
-const transaction = require('../../infrastructure/routes/transaction');
+const customer = require('../infrastructure/routes/customer');
 
 const buildRoutes = (app) => {
-  app.use('/v1/transaction', transaction());
+  app.use('/v1/customer', customer());
 
   return app;
 };
