@@ -33,7 +33,7 @@
       "max-len": ["error", { "code": 100 }],
       "max-lines": ["error", 100],
       "complexity": ["error", 15],
-      "max-lines-per-function": ["error", 30],
+      "max-lines-per-function": ["error", 40],
       "max-nested-callbacks": ["error", 4],
       "max-params": ["error", 3],
       "max-statements": ["error", 10],
