@@ -1,3 +1,4 @@
+const customerModel = require('./customer');
 const payableModel = require('./payable');
 
 /* eslint-disable max-lines-per-function, sort-keys, max-lines */
@@ -65,8 +66,12 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   const payable = payableModel(sequelize, DataTypes);
+  const customer = customerModel(sequelize, DataTypes);
+
   transaction.hasOne(payable, { foreignKey: 'transactionUid', as: 'payable' });
   payable.belongsTo(transaction, { foreignKey: 'transactionUid', as: 'transaction' });
+
+  transaction.belongsTo(customer, { foreignKey: 'customerUid', as: 'customer' });
 
   return transaction;
 };
