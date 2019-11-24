@@ -1,3 +1,5 @@
+const payableModel = require('./payable');
+
 /* eslint-disable max-lines-per-function, sort-keys, max-lines */
 module.exports = (sequelize, DataTypes) => {
   const transaction = sequelize.define('transaction', {
@@ -61,6 +63,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
     schema: 'psp',
   });
+
+  const payable = payableModel(sequelize, DataTypes);
+  transaction.hasOne(payable, { foreignKey: 'transactionUid', as: 'payable' });
+  payable.belongsTo(transaction, { foreignKey: 'transactionUid', as: 'transaction' });
 
   return transaction;
 };
