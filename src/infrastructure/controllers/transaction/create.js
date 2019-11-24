@@ -7,6 +7,7 @@ module.exports = (req, res) => {
   const service = new TransactionCreateService({
     PayableEntity,
     TransactionEntity,
+    payableModel: models.payable,
     transactionModel: models.transaction,
   });
   const {
