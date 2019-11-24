@@ -56,8 +56,8 @@ module.exports = (sequelize, DataTypes) => {
 
   const transaction = transactionModel(sequelize, DataTypes);
 
-  customer.hasMany(transaction);
-  transaction.belongsTo(customer);
+  customer.hasMany(transaction, { foreignKey: 'customerUid', as: 'transactions' });
+  transaction.belongsTo(customer, { foreignKey: 'customerUid', as: 'customer' });
 
   return customer;
 };

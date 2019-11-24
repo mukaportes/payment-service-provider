@@ -1,4 +1,4 @@
-const transactionModel = require('./transaction'); 
+// const transactionModel = require('./transaction'); 
 
 /* eslint-disable max-lines-per-function, sort-keys, max-lines */
 module.exports = (sequelize, DataTypes) => {
@@ -49,10 +49,10 @@ module.exports = (sequelize, DataTypes) => {
     schema: 'psp',
   });
 
-  const transaction = transactionModel(sequelize, DataTypes);
+  // const transaction = transactionModel(sequelize, DataTypes);
 
-  transaction.hasOne(payable);
-  payable.belongsTo(transaction);
+  // transaction.hasOne(payable, { foreignKey: 'transactionUid', as: 'payable' });
+  // payable.belongsTo(transaction, { foreignKey: 'transactionUid', as: 'transaction' });
 
   return payable;
 };
