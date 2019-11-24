@@ -18,5 +18,7 @@ module.exports = (req, res) => {
   return service.execute({
     amount, cardCvv, cardExpirationDate, cardHolderName,
     cardNumber, customerUid, description, paymentMethod,
-  }).then(({ output, status }) => res.status(status).json(output));
+  })
+    .then(({ output, status }) => res.status(status).json(output))
+    .catch(({ output, status }) => res.status(status).json(output));
 };

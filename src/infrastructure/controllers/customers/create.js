@@ -8,6 +8,7 @@ module.exports = (req, res) => {
 
   // mudar pro execute ser sincrono e ter os then/catch dentro dele
   return service.execute({ birthday, country, name })
-    .then(({ output, status }) => res.status(status).json(output));
+    .then(({ output, status }) => res.status(status).json(output))
+    .catch(({ output, status }) => res.status(status).json(output));
 };
 
