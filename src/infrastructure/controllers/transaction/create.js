@@ -15,7 +15,7 @@ module.exports = (req, res) => {
     cardNumber, customerUid, description, paymentMethod,
   } = req.body;
 
-  service.execute({
+  return service.execute({
     amount, cardCvv, cardExpirationDate, cardHolderName,
     cardNumber, customerUid, description, paymentMethod,
   })
