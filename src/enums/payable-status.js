@@ -1,6 +1,4 @@
-/* eslint-disable camelcase */
-
 module.exports = {
-  credit_card: 'waiting_funds',
-  debit_card: 'paid',
+  paid: 'paid',
+  waitingFunds: 'waiting_funds',
 };

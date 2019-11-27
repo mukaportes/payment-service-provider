@@ -1,11 +1,6 @@
 const httpResponse = require('../../../helpers/http-response');
 const { getArraySum } = require('../../../helpers/utils');
-
-// TODO: organize payable status enum
-const payableStatus = {
-  paid: 'paid',
-  waitingFunds: 'waiting_funds',
-};
+const PAYABLE_STATUS = require('../../../enums/payable-status');
 
 module.exports = function ({ payableModel, transactionModel }) {
   const getCustomerBalance = (transactions) => {
@@ -17,8 +12,8 @@ module.exports = function ({ payableModel, transactionModel }) {
       if (transaction.payable) {
         const { amount, status } = transaction.payable;
 
-        if (status === payableStatus.paid) paid.push(amount);
-        if (status === payableStatus.waitingFunds) waitingFunds.push(amount);
+        if (status === PAYABLE_STATUS.paid) paid.push(amount);
+        if (status === PAYABLE_STATUS.waitingFunds) waitingFunds.push(amount);
       }
     });
 

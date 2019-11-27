@@ -16,7 +16,6 @@ module.exports = function(transaction) {
     return validate(transaction, transactionValidations.create);
   };
 
-  // TODO: review this logic below
   this.getSanitizedCardNumber = function() {
     const cardNumberToString = transaction.cardNumber.toString();
     const cardNumberLength = cardNumberToString.length - 1;
