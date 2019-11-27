@@ -10,7 +10,6 @@ module.exports = function(CustomerEntity, customerModel) {
     const newCustomer = customerEntityInstance.getNewCustomer();
 
     return customerModel.create(newCustomer)
-      // TODO: add sys messages to response 
       .then(() => httpResponse.success({ data: 'Customer successfully created' }))
       .catch((error) => httpResponse.unprocessableEntity({
         error: error.message,

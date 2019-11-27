@@ -1,6 +1,7 @@
 const httpResponse = require('../../../helpers/http-response');
 const { getArraySum } = require('../../../helpers/utils');
 const PAYABLE_STATUS = require('../../../enums/payable-status');
+const MESSAGES = require('../../messages');
 
 module.exports = function ({ payableModel, transactionModel }) {
   const getCustomerBalance = (transactions) => {
@@ -8,7 +9,6 @@ module.exports = function ({ payableModel, transactionModel }) {
     const waitingFunds = [];
 
     transactions.forEach((transaction) => {
-      console.log('transaction', transaction.payable);
       if (transaction.payable) {
         const { amount, status } = transaction.payable;
 
@@ -17,15 +17,13 @@ module.exports = function ({ payableModel, transactionModel }) {
       }
     });
 
-    return {
-      paid: getArraySum(paid),
-      waitingFunds: getArraySum(waitingFunds),
-    };
+    return { paid: getArraySum(paid), waitingFunds: getArraySum(waitingFunds) };
   };
 
   this.execute = function (customerUid) {
-    // TODO: add sys error message
-    if (!customerUid) return httpResponse.badRequest({ error: 'customerUid is required' });
+    if (!customerUid) {
+      return httpResponse.badRequest(MESSAGES.customers.balance.requiredCostumerUid);
+    }
 
     return transactionModel.findAll({
       include: [{ as: 'payable', model: payableModel }],

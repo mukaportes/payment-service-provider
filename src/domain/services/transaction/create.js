@@ -1,4 +1,5 @@
 const httpResponse = require('../../../helpers/http-response');
+const MESSAGES = require('../../messages');
 
 module.exports = function ({
   PayableEntity, TransactionEntity, payableModel, transactionModel,
@@ -21,9 +22,8 @@ module.exports = function ({
     return transactionModel.create(newTransaction, {
       include: [{ as: 'payable', model: payableModel }],
     })
-      // TODO: add sys messages to response
       .then((transaction) => httpResponse.success({
-        data: 'Transaction successfully created',
+        ...MESSAGES.transaction.create.success,
         transaction,
       }))
       .catch((error) => httpResponse.unprocessableEntity({
