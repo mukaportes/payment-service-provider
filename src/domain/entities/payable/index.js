@@ -1,5 +1,6 @@
 const uuid = require('uuid/v4');
 const PAYMENT_METHODS = require('../../../enums/payment-methods');
+const MESSAGES = require('../../messages');
 
 // eslint-disable-next-line max-lines-per-function 
 module.exports = function (transaction) {
@@ -7,7 +8,7 @@ module.exports = function (transaction) {
     const errors = [];
 
     if (!PAYMENT_METHODS.toStatus[transaction.paymentMethod]) {
-      errors.push({ message: 'Invalid payment method' });
+      errors.push(MESSAGES.payable.create.invalidPaymentMethod);
     }
 
     return errors;
