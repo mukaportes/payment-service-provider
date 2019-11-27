@@ -44,9 +44,10 @@ module.exports = function (transaction) {
 
   this.getNewPayable = function () {
     return {
-      createdAt: this.getCreationDate(),
+      createdAt: new Date().toISOString(),
       createdBy: transaction.customerUid,
       payableUid: uuid(),
+      paymentDate: this.getCreationDate(),
       status: this.getStatus(),
       ...this.getFeeAndAmount(),
     };
