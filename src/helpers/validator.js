@@ -11,7 +11,7 @@ const Joi = require('joi');
 module.exports = (input, schema) => {
   const validation = Joi.validate(input, schema, { allowUnknown: true });
 
-  const isValid = validation !== null;
+  const isValid = validation.error === null;
   const validationErrors = isValid ? [] : validation.error.details;
 
   return { isValid, validationErrors };

@@ -1,5 +1,5 @@
 const models = require('../../../db/models');
-const CustomerEntity = require('../../../domain/entities/customers');
+const CustomerEntity = require('../../../domain/entities/customer');
 const CustomerCreateService = require('../../../domain/services/customers/create');
 
 module.exports = (req, res) => {
