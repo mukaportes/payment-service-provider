@@ -2,9 +2,6 @@ const httpResponse = require('../../../helpers/http-response');
 
 module.exports = function ({ customerModel, payableModel, transactionModel }) {
   this.execute = function () {
-  // this.execute = function (filters) {
-    // TODO: add filters validation
-
     return transactionModel.findAll({
       include: [
         { as: 'customer', model: customerModel },

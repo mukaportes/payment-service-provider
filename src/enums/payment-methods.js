@@ -10,7 +10,13 @@ const toNumber = {
   debit_card: 2,
 };
 
+const toStatus = {
+  credit_card: 'waiting_funds',
+  debit_card: 'paid',
+};
+
 module.exports = {
   toNumber,
+  toStatus,
   toString,
 };

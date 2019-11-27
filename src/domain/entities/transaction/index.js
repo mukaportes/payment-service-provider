@@ -4,12 +4,18 @@ const transactionValidations = require('./validations');
 const PAYMENT_METHODS = require('../../../enums/payment-methods');
 
 module.exports = function(transaction) {
+  this.isCardExpired = function() {
+    return new Date(transaction.cardExpirationDate) < new Date();
+  };
+
   this.validateNewTransaction = function() {
-    // TODO: add validation of cardExpirationDate >= new Date()
+    if (this.isCardExpired()) {
+      return { isValid: false, validationErrors: [{ message: 'The given card is expired' }] };
+    }
+    
     return validate(transaction, transactionValidations.create);
   };
 
-  // TODO: review this logic below
   this.getSanitizedCardNumber = function() {
     const cardNumberToString = transaction.cardNumber.toString();
     const cardNumberLength = cardNumberToString.length - 1;

@@ -1,0 +1,30 @@
+version: "3"
+services:
+  app:
+    build: .
+    depends_on:
+      - postgres
+    env_file: .env
+    # environment:
+    #   DATABASE_NAME: psp_db
+    #   DATABASE_HOST: postgres
+    #   DATABASE_PASSWORD: postgres
+    #   DATABASE_PORT: 5432
+    #   DATABASE_USER: postgres
+    #   NODE_ENV: development
+    #   PORT: 3000
+    ports:
+      - "3000:3000"
+    command: npm start
+    volumes:
+      - .:/app/
+      - /app/node_modules
+
+  postgres:
+    image: postgres:10.4
+    ports:
+      - "35432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: psp_db
