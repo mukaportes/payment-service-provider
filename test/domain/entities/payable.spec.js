@@ -88,11 +88,11 @@ describe('Payable Entity Tests', () => {
       const todayDate = new Date().toDateString();
 
       assert.deepStrictEqual(newPayable, {
-        ...transactionMock,
         amount: Number(transactionMock.amount) * 0.97,
         fee: Number(transactionMock.amount) * 0.03,
         status: PAYMENT_METHODS.toStatus[paymentMethod],
       });
+      assert.deepStrictEqual(transactionMock, {});
       assert.deepStrictEqual(new Date(createdAt).toDateString(), todayDate);
       assert.deepStrictEqual(new Date(paymentDate).toDateString(), todayDate);
       assert.deepStrictEqual(!!paymentUid, true);
