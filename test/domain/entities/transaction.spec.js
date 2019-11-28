@@ -35,4 +35,11 @@ describe('Transaction Entity Tests', () => {
       assert.deepStrictEqual(validationErrors, [MESSAGES.transaction.create.expiredCard]);
     });
   });
+  describe('getSanitizedCardNumber()', () => {
+    it('returns only the last four chars of the card number', () => {
+      const entity = new TransactionEntity({ cardNumber: '111111111234' });
+
+      assert(entity.getSanitizedCardNumber(), 1234);
+    });
+  });
 });
