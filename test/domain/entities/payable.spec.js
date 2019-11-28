@@ -92,11 +92,10 @@ describe('Payable Entity Tests', () => {
         fee: Number(transactionMock.amount) * 0.03,
         status: PAYMENT_METHODS.toStatus[paymentMethod],
       });
-      assert.deepStrictEqual(transactionMock, {});
       assert.deepStrictEqual(new Date(createdAt).toDateString(), todayDate);
       assert.deepStrictEqual(new Date(paymentDate).toDateString(), todayDate);
-      assert.deepStrictEqual(!!paymentUid, true);
-      assert.deepStrictEqual(!!transactionMock.customerUid, createdBy);
+      assert.equal(!!payableUid, true);
+      assert.deepStrictEqual(transactionMock.customerUid, createdBy);
     });
   });
 });

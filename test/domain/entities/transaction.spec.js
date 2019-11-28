@@ -16,10 +16,8 @@ describe('Transaction Entity Tests', () => {
       assert.deepStrictEqual(isValid, true);
       assert.deepStrictEqual(validationErrors, []);
     });
-    it('returns array with invalid payment method error when its not a valid one', () => {
-      const entity = new TransactionEntity({ 
-        ...newTransactionMock, paymentMethod: faker.random.word(),
-      });
+    it('returns array with validation errors when input is not valid', () => {
+      const entity = new TransactionEntity({});
 
       const { isValid, validationErrors } = entity.validateNewTransaction();
 
