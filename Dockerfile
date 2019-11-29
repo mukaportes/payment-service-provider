@@ -9,8 +9,9 @@ RUN npm install
 
 COPY . .
 
-RUN npm run migrate
+RUN cp docker-entrypoint.sh /usr/local/bin/ && \
+    chmod +x /usr/local/bin/docker-entrypoint.sh
 
-EXPOSE 8000
+EXPOSE 3000
 
-CMD npm start
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
