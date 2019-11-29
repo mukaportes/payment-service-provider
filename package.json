@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "lint:fix": "eslint ./src --fix",
-    "migrate": "knex --knexfile src/db/knexfile.js migrate:latest",
+    "migrate": "knex --knexfile ./src/db/knexfile.js migrate:latest",
     "migrate:rollback": "knex --knexfile src/db/knexfile.js migrate:rollback",
     "start": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc --reporter=text mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -39,5 +39,28 @@
     "faker": "^4.1.0",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1"
+  },
+  "nyc": {
+    "all": true,
+    "check-coverage": true,
+    "per-file": false,
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 90,
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "test/**/*.js",
+      "src/infrastructure/**/*.js",
+      "src/db/**/*.js",
+      "src/config/**/*.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "report-dir": "./coverage"
   }
 }
