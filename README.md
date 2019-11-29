@@ -60,7 +60,7 @@ npm install
 npm run migrate
 ```
 
-8. Para iniciar a aplicação, execute
+8. Para iniciar a aplicação na porta 3000, execute
 ```
 npm start
 ```
