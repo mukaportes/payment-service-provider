@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 module.exports = {
   customers: {
     balance: {
@@ -16,7 +17,7 @@ module.exports = {
       expiredCard: {
         code: 4,
         message: 'Card given is expired.',
-      }
+      },
     },
   },
   payable: {
