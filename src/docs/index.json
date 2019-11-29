@@ -1,0 +1,367 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Payment Service Provider REST API",
+    "version": "1.0.0",
+    "title": "PSP API"
+  },
+  "basePath": "/v1",
+  "paths": {
+    "/transaction": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Creates a new transaction and its payable.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "transaction",
+            "description": "Transaction info.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "cardCvv": {
+                  "type": "number"
+                },
+                "cardExpirationDate": {
+                  "type": "string"
+                },
+                "cardHolderName": {
+                  "type": "string"
+                },
+                "cardNumber": {
+                  "type": "string"
+                },
+                "customerUid": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "paymentMethod": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/message"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Retrieves all transactions.",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "type": "array",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "transactions": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/transactionOutput"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/customer": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "description": "Creates a new customer.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "customer",
+            "description": "The customer to be created.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "birthday": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/message"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/customer/{customerUid}/balance": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "description": "Retrieves customer balance.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customerUid",
+            "description": "Customer's customerUid.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/balanceOutput"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "$ref": "#/definitions/errorMessage"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "customerOutput": {
+      "type": "object",
+      "properties": {
+        "customerUid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        }
+      }
+    },
+    "payableOutput": {
+      "type": "object",
+      "properties": {
+        "payableUid": {
+          "type": "string"
+        },
+        "transactionUid": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "fee": {
+          "type": "number"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "paymentDate": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        }
+      }
+    },
+    "transactionOutput": {
+      "type": "object",
+      "properties": {
+        "transactionUid": {
+          "type": "string"
+        },
+        "customerUid": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "paymentMethod": {
+          "type": "string"
+        },
+        "cardNumber": {
+          "type": "string"
+        },
+        "cardHolderName": {
+          "type": "string"
+        },
+        "cardExpirationDate": {
+          "type": "string"
+        },
+        "cardCvv": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "payable": {
+          "schema": {
+            "$ref": "#/definitions/payableOutput"
+          }
+        },
+        "customer": {
+          "schema": {
+            "$ref": "#/definitions/customerOutput"
+          }
+        }
+      }
+    },
+    "balanceOutput": {
+      "type": "object",
+      "properties": {
+        "paid": {
+          "type": "number"
+        },
+        "waitingFunds": {
+          "type": "string"
+        }
+      }
+    },
+    "message": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "errorMessage": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

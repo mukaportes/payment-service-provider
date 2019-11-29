@@ -1,7 +1,7 @@
 const models = require('../../../db/models');
 const GetAllTransactionService = require('../../../domain/services/transaction/get-all');
 
-module.exports = (req, res) => {
+module.exports = (_, res) => {
   const service = new GetAllTransactionService({
     customerModel: models.customer,
     payableModel: models.payable,
