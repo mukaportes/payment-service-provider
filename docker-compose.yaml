@@ -4,7 +4,6 @@ services:
     build: .
     depends_on:
       - postgres
-    env_file: .env
     environment:
       DATABASE_NAME: psp_db
       DATABASE_HOST: postgres
@@ -15,7 +14,7 @@ services:
       PORT: 3000
     ports:
       - "3000:3000"
-    command: npm run migrate && npm start
+    command: bash -c "npm run migrate && npm start"
     volumes:
       - .:/usr/app
       - /usr/app/node_modules
