@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint:fix": "eslint ./src --fix",
-    "migrate": "knex --knexfile src/db/knexfile.js migrate:latest",
+    "migrate": "knex --knexfile ./src/db/knexfile.js migrate:latest",
     "migrate:rollback": "knex --knexfile src/db/knexfile.js migrate:rollback",
     "start": "nodemon src/index.js",
     "test": "nyc --reporter=text mocha --recursive"
