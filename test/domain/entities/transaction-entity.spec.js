@@ -41,9 +41,9 @@ describe('Transaction Entity Tests', () => {
   });
   describe('getSanitizedCardNumber()', () => {
     it('returns only the last four chars of the card number', () => {
-      const entity = new TransactionEntity({ cardNumber: '111111111234' });
+      const entity = new TransactionEntity({ cardNumber: '1111 1111 1234' });
 
-      assert(entity.getSanitizedCardNumber(), 1234);
+      assert.deepStrictEqual(entity.getSanitizedCardNumber(), 1234);
     });
   });
 });

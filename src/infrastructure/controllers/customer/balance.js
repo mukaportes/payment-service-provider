@@ -1,5 +1,5 @@
 const models = require('../../../db/models');
-const CustomerBalanceService = require('../../../domain/services/customers/balance');
+const CustomerBalanceService = require('../../../domain/services/customer/balance');
 
 module.exports = (req, res) => {
   const { params: { customerUid } } = req;
