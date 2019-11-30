@@ -65,6 +65,19 @@ npm run migrate
 npm start
 ```
 
+### Alterando credenciais
+Para alterar as variáveis de ambiente da aplicação, basta ir ao arquivo **docker-compse.yaml** e alterar as seguintes linhas:
+
+```
+environment:
+  DATABASE_NAME: your_db_name
+  DATABASE_HOST: postgres
+  DATABASE_PASSWORD: your_db_password
+  DATABASE_PORT: 5432 (or another port rather than the Postgres default one)
+  DATABASE_USER: your_db_user
+  NODE_ENV: your_node_environment
+```
+
 ### Domínios da Aplicação
 
 **Payment Method**
@@ -78,6 +91,5 @@ credit_card
 paid
 waiting_funds
 ```
-
 
  
