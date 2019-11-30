@@ -78,8 +78,13 @@ environment:
   NODE_ENV: your_node_environment
 ```
 
-### Domínios da Aplicação
+### Documentação da aplicação
+Ao iniciar a aplicação, podemos visualizar a documentação da aplicação - utlizando **Swagger** - ao ir ao endereço `http://localhost:3000/docs`.
 
+### Informações adicionais
+Dentro da pasta **/_utils** pode-se encontrar uma collection do *Postman* para se efetuar testes da aplicação e também um guia para execução destes.
+
+### Domínios da aplicação
 **Payment Method**
 ```
 debit_card
