@@ -2,6 +2,7 @@ const uuid = require('uuid/v4');
 const validate = require('../../../helpers/validator');
 const transactionValidations = require('./validations');
 const PAYMENT_METHODS = require('../../../enums/payment-methods');
+const MESSAGES = require('../../messages');
 
 module.exports = function(transaction) {
   this.isCardExpired = function() {
@@ -10,7 +11,7 @@ module.exports = function(transaction) {
 
   this.validateNewTransaction = function() {
     if (this.isCardExpired()) {
-      return { isValid: false, validationErrors: [{ message: 'The given card is expired' }] };
+      return { isValid: false, validationErrors: [MESSAGES.transaction.create.expiredCard] };
     }
     
     return validate(transaction, transactionValidations.create);

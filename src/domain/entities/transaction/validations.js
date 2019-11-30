@@ -8,7 +8,7 @@ const create = Joi.object().keys({
   cardNumber: Joi.number().required(),
   customerUid: Joi.string().uuid().required(),
   description: Joi.string().required(),
-  paymentMethod: Joi.number().required(),
+  paymentMethod: Joi.string().required(),
 }).required();
 
 module.exports = { create };

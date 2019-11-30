@@ -1,4 +1,5 @@
 const httpResponse = require('../../../helpers/http-response');
+const MESSAGES = require('../../messages');
 
 module.exports = function(CustomerEntity, customerModel) {
   this.execute = (input) => {
@@ -10,7 +11,7 @@ module.exports = function(CustomerEntity, customerModel) {
     const newCustomer = customerEntityInstance.getNewCustomer();
 
     return customerModel.create(newCustomer)
-      .then(() => httpResponse.success({ data: 'Customer successfully created' }))
+      .then(() => httpResponse.success(MESSAGES.customers.create.success))
       .catch((error) => httpResponse.unprocessableEntity({
         error: error.message,
         stack: error.stack,
