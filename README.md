@@ -65,7 +65,7 @@ npm run migrate
 npm start
 ```
 
-### Domain Information
+### Domínios da Aplicação
 
 **Payment Method**
 ```
