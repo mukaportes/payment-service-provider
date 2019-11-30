@@ -4,19 +4,23 @@ const { newCustomerMock } = require('../../mocks/customer');
 
 describe('Customer Entity Tests', () => {
   describe('validateNewCustomer()', () => {
-    it('returns isValid true and no errors when entity input is valid', () => {
-      const entity = new CustomerEntity(newCustomerMock);
-      const { isValid, validationErrors } = entity.validateNewCustomer();
+    describe('when input is valid', () => {
+      it('returns isValid true and no errors when entity input is valid', () => {
+        const entity = new CustomerEntity(newCustomerMock);
+        const { isValid, validationErrors } = entity.validateNewCustomer();
 
-      assert.deepStrictEqual(isValid, true);
-      assert.deepStrictEqual(validationErrors, []);
+        assert.deepStrictEqual(isValid, true);
+        assert.deepStrictEqual(validationErrors, []);
+      });
     });
-    it('returns isValid false and validation errors when entity input is not valid', () => {
-      const entity = new CustomerEntity();
-      const { isValid, validationErrors } = entity.validateNewCustomer();
+    describe('when input is invalid', () => {
+      it('returns isValid false and validation errors when entity input is not valid', () => {
+        const entity = new CustomerEntity();
+        const { isValid, validationErrors } = entity.validateNewCustomer();
 
-      assert.deepStrictEqual(isValid, false);
-      assert.deepStrictEqual(validationErrors.length > 0, true);
+        assert.deepStrictEqual(isValid, false);
+        assert.deepStrictEqual(validationErrors.length > 0, true);
+      });
     });
   });
   describe('getNewCustomer()', () => {

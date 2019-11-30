@@ -8,17 +8,21 @@ const PAYMENT_METHODS = require('../../../src/enums/payment-methods');
 
 describe('Payable Entity Tests', () => {
   describe('validate()', () => {
-    it('returns empty errors array when the input is valid', () => {
-      const entity = new PayableEntity(newTransactionMock);
-
-      assert.deepStrictEqual(entity.validate(), []);
-    });
-    it('returns array with invalid payment method error when its not a valid one', () => {
-      const entity = new PayableEntity({ 
-        ...newTransactionMock, paymentMethod: faker.random.word(),
+    describe('when input is valid', () => {
+      it('returns empty errors array when the input is valid', () => {
+        const entity = new PayableEntity(newTransactionMock);
+  
+        assert.deepStrictEqual(entity.validate(), []);
       });
-
-      assert.deepStrictEqual(entity.validate(), [MESSAGES.payable.create.invalidPaymentMethod]);
+    });
+    describe('when input is invalid', () => {
+      it('returns array with invalid payment method error when its not a valid one', () => {
+        const entity = new PayableEntity({ 
+          ...newTransactionMock, paymentMethod: faker.random.word(),
+        });
+  
+        assert.deepStrictEqual(entity.validate(), [MESSAGES.payable.create.invalidPaymentMethod]);
+      });
     });
   });
   describe('getStatus()', () => {
