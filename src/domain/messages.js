@@ -7,6 +7,12 @@ module.exports = {
         message: 'The param customerUid is required.',
       },
     },
+    create: {
+      success: {
+        code: 5,
+        message: 'Customer successfully created.',
+      },
+    },
   },
   transaction: {
     create: {
