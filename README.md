@@ -65,11 +65,6 @@ npm run migrate
 npm start
 ```
 
-#### Considerações
-
-**O sistema estaria pronto para ir para produção?**  
-- Em termos de segurança, creio que não. Apenas com uma camada externa/gateway de autenticação, uma vez que a API está 'aberta'. Porém, pensando pelo lado de concorrência e performance, sim, estaria. As tabelas e operações envolvem apenas INSERT e SELECT, ou seja, não teríamos problema de locks no banco e as operações disponíveis não consomem uma grande quantidade de memória, mantendo a saúde de um server hospedando a aplicação. Temos também uma config de database pool definida de forma que rode de forma escalável em sistemas de banco de dados de qualquer dimensão, tendo 'poucas' conexões definidas no pool para garantir que haja mais de um container operando sem problemas quando a aplicação é escalada.
-
 
 
 
