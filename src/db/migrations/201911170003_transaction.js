@@ -25,12 +25,12 @@ exports.up = knex => Promise.all([
           .comment('Description of a transaction.');
 
         table
-          .integer('payment_method')
+          .string('payment_method')
           .notNullable()
           .comment('Payment method of a transaction.');
 
         table
-          .integer('card_number')
+          .string('card_number')
           .notNullable()
           .comment('Last digits of the card number of a transaction.');
 

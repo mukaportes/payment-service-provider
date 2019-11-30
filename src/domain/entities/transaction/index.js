@@ -1,7 +1,6 @@
 const uuid = require('uuid/v4');
 const validate = require('../../../helpers/validator');
 const transactionValidations = require('./validations');
-const PAYMENT_METHODS = require('../../../enums/payment-methods');
 const MESSAGES = require('../../messages');
 
 module.exports = function(transaction) {
@@ -18,7 +17,8 @@ module.exports = function(transaction) {
   };
 
   this.getSanitizedCardNumber = function() {
-    const cardNumberToString = transaction.cardNumber.toString();
+    const cardNumberToString = typeof transaction.cardNumber === 'string'
+      ? transaction.cardNumber : transaction.cardNumber.toString();
     const cardNumberLength = cardNumberToString.length - 1;
     let sanitizedCardNumber = '';
 
@@ -36,7 +36,7 @@ module.exports = function(transaction) {
       createdAt: new Date().toISOString(),
       createdBy: transaction.customerUid,
       payable,
-      paymentMethod: PAYMENT_METHODS.toNumber[transaction.paymentMethod],
+      paymentMethod: transaction.paymentMethod,
       transactionUid: uuid(),
     };
   };

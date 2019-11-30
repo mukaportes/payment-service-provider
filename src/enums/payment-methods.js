@@ -1,13 +1,8 @@
 /* eslint-disable camelcase */
 
-const toString = {
-  1: 'credit_card',
-  2: 'debit_card',
-};
-
-const toNumber = {
-  credit_card: 1,
-  debit_card: 2,
+const methods = {
+  creditCard: 'credit_card',
+  debitCard: 'debit_card',
 };
 
 const toStatus = {
@@ -16,7 +11,6 @@ const toStatus = {
 };
 
 module.exports = {
-  toNumber,
+  methods,
   toStatus,
-  toString,
 };

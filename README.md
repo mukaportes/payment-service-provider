@@ -65,8 +65,19 @@ npm run migrate
 npm start
 ```
 
+### Domain Information
 
+**Payment Method**
+```
+debit_card
+credit_card
+```
 
+**Payable Status**
+```
+paid
+waiting_funds
+```
 
 
  

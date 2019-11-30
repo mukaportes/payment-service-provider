@@ -7,7 +7,7 @@ module.exports = function (transaction) {
   this.validate = function () {
     const errors = [];
 
-    if (!PAYMENT_METHODS.toStatus[transaction.paymentMethod]) {
+    if (!Object.values(PAYMENT_METHODS.methods).includes(transaction.paymentMethod)) {
       errors.push(MESSAGES.payable.create.invalidPaymentMethod);
     }
 

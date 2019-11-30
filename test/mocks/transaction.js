@@ -4,12 +4,13 @@ const PAYMENT_METHODS = require('../../src/enums/payment-methods');
 module.exports = {
   newTransactionMock: {
     amount: faker.finance.amount(),
-    cardCvv: faker.random.number({ max: 9999, min: 1 }),
+    cardCvv: faker.finance.creditCardCVV(),
     cardExpirationDate: faker.date.future(),
     cardHolderName: faker.name.findName(),
-    cardNumber: faker.random.number({ max: 9999999999999999, min: 1000000000000000 }),
+    cardNumber: faker.finance.creditCardNumber(),
     customerUid: faker.random.uuid(),
     description: faker.lorem.sentence(),
-    paymentMethod: PAYMENT_METHODS.toString[faker.random.number({ max: 2, min: 1 })],
+    paymentMethod: Object
+      .values(PAYMENT_METHODS.methods)[faker.random.number({ max: 1, min: 0 })],
   },
 };
