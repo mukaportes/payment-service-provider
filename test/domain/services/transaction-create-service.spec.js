@@ -19,7 +19,11 @@ describe('Transaction Create Service Tests', () => {
         assert(service.execute(), httpResponse
           .badRequest({ errors: validationErrors }));
       });
-      it('returns unprocessable status and error message when a DB error occurs', () => {
+      it('returns unprocessable status and error message when a DB error occurs', (done) => {
+        const errorMessage = faker.random.words();
+        const dbException = new Error(errorMessage);
+        const unprocessableEntityStatus = 422;
+        
         const TransactionEntity = function() {
           this.getNewTransaction = () => ({});
           this.validateNewTransaction = () => ({ isValid: true, validationErrors: [] });
