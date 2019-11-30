@@ -11,7 +11,7 @@ describe('Customer Balance Service Tests', () => {
       it('returns badRequest status and error message when customerUid is not given', () => {
         const service = new CustomerBalanceService({});
         const result = service.execute();
-  
+
         assert.deepStrictEqual(result, httpResponse
           .badRequest(MESSAGES.customers.balance.requiredCostumerUid));
       });
@@ -42,26 +42,23 @@ describe('Customer Balance Service Tests', () => {
         const paidAmount = faker.finance.amount();
         const waitingFundsAmount = faker.finance.amount();
 
+        const transactionPaidTemplate = {
+          amount: paidAmount,
+          status: PAYABLE_STATUS.paid,
+        };
+        const transactionWaitingFundsTemplate = {
+          amount: waitingFundsAmount,
+          status: PAYABLE_STATUS.waitingFunds,
+        };
+
         const service = new CustomerBalanceService({
           transactionModel: {
             findAll: () => new Promise((resolve) => {
               resolve([
-                {
-                  amount: paidAmount,
-                  status: PAYABLE_STATUS.paid,
-                },
-                {
-                  amount: paidAmount,
-                  status: PAYABLE_STATUS.paid,
-                },
-                {
-                  amount: waitingFundsAmount,
-                  status: PAYABLE_STATUS.waitingFunds,
-                },
-                {
-                  amount: waitingFundsAmount,
-                  status: PAYABLE_STATUS.waitingFunds,
-                },
+                { payable: transactionPaidTemplate },
+                { payable: transactionPaidTemplate },
+                { payable: transactionWaitingFundsTemplate },
+                { payable: transactionWaitingFundsTemplate },
               ]);
             }),
           },
@@ -73,6 +70,67 @@ describe('Customer Balance Service Tests', () => {
               paid: Number(paidAmount) * 2,
               waitingFunds: Number(waitingFundsAmount) * 2,
             }));
+            done();
+          });
+      });
+      it('returns success status and customer balance zero when user has no transactions', (done) => {
+        const service = new CustomerBalanceService({
+          transactionModel: {
+            findAll: () => new Promise((resolve) => {
+              resolve([{}]);
+            }),
+          },
+        });
+
+        service.execute(faker.random.uuid())
+          .then((result) => {
+            assert.deepStrictEqual(result, httpResponse.success({ paid: 0, waitingFunds: 0 }));
+            done();
+          });
+      });
+      it('returns success status and customer paid balance zero when user has only transactions with waiting funds payable', (done) => {
+        const waitingFundsAmount = faker.finance.amount();
+        const transactionWaitingFundsTemplate = {
+          amount: waitingFundsAmount,
+          status: PAYABLE_STATUS.waitingFunds,
+        };
+
+        const service = new CustomerBalanceService({
+          transactionModel: {
+            findAll: () => new Promise((resolve) => {
+              resolve([
+                { payable: transactionWaitingFundsTemplate }
+              ]);
+            }),
+          },
+        });
+
+        service.execute(faker.random.uuid())
+          .then((result) => {
+            assert.deepStrictEqual(result.output, { paid: 0, waitingFunds: Number(waitingFundsAmount) });
+            done();
+          });
+      });
+      it('returns success status and customer waiting funds balance zero when user has only transactions with paid payable', (done) => {
+        const paidAmount = faker.finance.amount();
+        const transactionPaidTemplate = {
+          amount: paidAmount,
+          status: PAYABLE_STATUS.paid,
+        };
+
+        const service = new CustomerBalanceService({
+          transactionModel: {
+            findAll: () => new Promise((resolve) => {
+              resolve([
+                { payable: transactionPaidTemplate }
+              ]);
+            }),
+          },
+        });
+
+        service.execute(faker.random.uuid())
+          .then((result) => {
+            assert.deepStrictEqual(result.output, { paid: Number(paidAmount), waitingFunds: 0 });
             done();
           });
       });
