@@ -5,7 +5,7 @@ const create = Joi.object().keys({
   cardCvv: Joi.number().required(),
   cardExpirationDate: Joi.date().required(),
   cardHolderName: Joi.string().required(),
-  cardNumber: Joi.number().required(),
+  cardNumber: Joi.string().creditCard(),
   customerUid: Joi.string().uuid().required(),
   description: Joi.string().required(),
   paymentMethod: Joi.string().required(),
