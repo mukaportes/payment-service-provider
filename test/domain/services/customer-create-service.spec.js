@@ -17,7 +17,7 @@ describe('Customer Create Service Tests', () => {
         assert.deepStrictEqual(service.execute(), httpReponse
           .badRequest({ errors: validationErrors }));
       });
-      it('returns unprocessable entity status and error message when an DB error occurrs', () => {
+      it('returns unprocessable entity status and error message when an DB error occurrs', (done) => {
         const errorMessage = faker.random.words();
         const dbException = new Error(errorMessage);
         const unprocessableEntityStatus = 422;

@@ -56,7 +56,10 @@
       "test/**/*.js",
       "src/infrastructure/**/*.js",
       "src/db/**/*.js",
-      "src/config/**/*.js"
+      "src/config/**/*.js",
+      "src/loaders/**/*.js",
+      "src/app/**/*.js",
+      "src/index.js"
     ],
     "reporter": [
       "lcov",
