@@ -16,7 +16,7 @@ describe('Transaction Create Service Tests', () => {
 
         const service = new TransactionCreateService({ TransactionEntity, PayableEntity });
 
-        assert(service.execute(), httpResponse
+        assert.deepStrictEqual(service.execute(), httpResponse
           .badRequest({ errors: validationErrors }));
       });
       it('returns unprocessable status and error message when a DB error occurs', (done) => {
@@ -70,7 +70,7 @@ describe('Transaction Create Service Tests', () => {
         });
 
         service.execute().then((result) => {
-          assert(result, httpResponse
+          assert.deepStrictEqual(result, httpResponse
           .success(MESSAGES.transaction.create.success));
 
           done();

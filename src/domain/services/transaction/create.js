@@ -8,10 +8,10 @@ module.exports = function ({
     const transactionEntityInstance = new TransactionEntity(input);
     const payableEntityInstance = new PayableEntity(input);
 
-    const transactionValidation = transactionEntityInstance.validateNewTransaction();
+    const { isValid, validationErrors } = transactionEntityInstance.validateNewTransaction();
 
-    if (!transactionValidation.isValid) {
-      return httpResponse.badRequest({ errors: transactionValidation });
+    if (!isValid) {
+      return httpResponse.badRequest({ errors: validationErrors });
     }
 
     const newTransaction = {
@@ -22,10 +22,7 @@ module.exports = function ({
     return transactionModel.create(newTransaction, {
       include: [{ as: 'payable', model: payableModel }],
     })
-      .then((transaction) => httpResponse.success({
-        ...MESSAGES.transaction.create.success,
-        transaction,
-      }))
+      .then(() => httpResponse.success(MESSAGES.transaction.create.success))
       .catch((error) => httpResponse.unprocessableEntity({
         error: error.message,
         stack: error.stack,

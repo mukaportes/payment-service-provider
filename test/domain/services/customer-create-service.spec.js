@@ -12,7 +12,7 @@ describe('Customer Create Service Tests', () => {
         const CustomerEntity = function () {
           this.validateNewCustomer = () => ({ isValid: false, validationErrors });
         };
-        const service = new CustomerCreateService(CustomerEntity);
+        const service = new CustomerCreateService({ CustomerEntity });
 
         assert.deepStrictEqual(service.execute(), httpReponse
           .badRequest({ errors: validationErrors }));
@@ -33,7 +33,7 @@ describe('Customer Create Service Tests', () => {
           }),
         };
 
-        const service = new CustomerCreateService(CustomerEntity, customerModel);
+        const service = new CustomerCreateService({ CustomerEntity, customerModel });
 
         service.execute(faker.random.uuid())
           .then((errorResponse) => {
@@ -46,19 +46,20 @@ describe('Customer Create Service Tests', () => {
     });
     describe('when input is valid', () => {
       it('returns success status and success message when input customer is created', (done) => {
+        const customerUid = faker.random.uuid();
         const CustomerEntity = function () {
           this.getNewCustomer = () => ({});
           this.validateNewCustomer = () => ({ isValid: true, validationErrors: [] });
         };
         const customerModel = {
-          create: () => new Promise(resolve => resolve({})),
+          create: () => new Promise(resolve => resolve({ customerUid })),
         };
 
-        const service = new CustomerCreateService(CustomerEntity, customerModel);
+        const service = new CustomerCreateService({ CustomerEntity, customerModel });
 
-        service.execute().then((result) => {
-          assert.deepStrictEqual(result, httpReponse
-            .success(MESSAGES.customers.create.success));
+        service.execute().then((response) => {
+          assert.deepStrictEqual(response, httpReponse
+            .success({ ...MESSAGES.customers.create.success, customerUid }));
 
           done();
         })

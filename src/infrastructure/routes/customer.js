@@ -1,6 +1,6 @@
 const express = require('express');
-const customerCreateController = require('../controllers/customers/create');
-const customerBalanceController = require('../controllers/customers/balance');
+const customerCreateController = require('../controllers/customer/create');
+const customerBalanceController = require('../controllers/customer/balance');
 
 const customerRouter = express.Router();
 
