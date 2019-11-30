@@ -15,6 +15,9 @@
     "type": "git",
     "url": "git+https://github.com/mukaportes/payment-service-provider.git"
   },
+  "engines": {
+    "node": ">= 10.13.0"
+  },
   "author": "Murilo Portescheller <mport.dev@gmail.com>",
   "license": "UNLICENSED",
   "bugs": {
